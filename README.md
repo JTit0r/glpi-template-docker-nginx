@@ -60,3 +60,20 @@ ldapsearch \
     -b "cn=users,dc=x,dc=local" \
     -s sub "(cn=*)" cn mail sn
 ```
+
+## habilitar timezones
+
+- no container db-x
+
+```bash
+mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root -p mysql
+mysql -u root -p
+GRANT SELECT ON mysql.time_zone_name TO 'x123'@'%';
+FLUSH PRIVILEGES;
+```
+
+- no container glpiserver
+
+```bash
+php bin/console database:enable_timezones
+```
